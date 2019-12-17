@@ -1,0 +1,68 @@
+<h1 mat-dialog-title>Detalle listado de viaje / Patente {{data.patent}} </h1>
+
+<mat-dialog-content class="limited-box">
+    <p>Puedes revisar el detalle en cada uno de los elementos.</p>
+    <div *ngFor="let detail of data.detail">
+        <mat-card class="mb-2">
+            <mat-grid-list cols=6 rowHeight="50px">
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    Tienda:
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <b>{{detail.store}}</b>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    N° de Guía:
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <b>{{detail.guideNumber}}</b>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    Modalidad: 
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <b>{{detail.modality}}</b>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    Sector:
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <b>{{detail.sector}}</b>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    Despacho:
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <b>A3DSG54</b>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    Peso:
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <b>{{detail.weight}} Kg</b>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    Recorrido:
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <b>Ruta 20</b>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    Hoja de Ruta:
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <b>{{detail.roadNumber}}</b>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    Monto:
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <b class="text-danger">${{formatNumber(detail.tariff)}}</b>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </mat-card>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Volver</button>
+</mat-dialog-actions>

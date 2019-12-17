@@ -1,0 +1,79 @@
+<mat-radio-group aria-label="Select an option">
+    <mat-radio-button class="mr-2" value="1">Viajes</mat-radio-button>
+    <mat-radio-button class="mr-2" value="2">Alertas</mat-radio-button>
+</mat-radio-group>
+
+<!-- <button class="btn btn-success"(click)="test()">test</button> -->
+
+<div class="row">
+    <div class="col">
+        <h3>Introduce una fecha</h3>
+    </div>
+</div>
+<div class="row mb-4">
+    <div class="col">
+        <div class="input-group flex-nowrap">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="fecha">Fecha</label>
+            </div>
+            <input type="date" class="form-control" id="fecha" aria-describedby="addon-wrapping" [(ngModel)]="inputDate">
+            <button class="btn btn-danger ml-2" (click)="searchReservationsByDate()">Buscar</button>                    
+        </div>
+    </div>
+</div>
+
+<div *ngIf="loading; else loadedItems">
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+</div>
+
+<ng-template #loadedItems>
+    
+    <div  *ngIf="showTrips.length > 0; else empty">
+        <div class="row">
+            <div class="col-4">
+                <mat-form-field>
+                    <mat-label>Transportista</mat-label>
+                    <mat-select>
+                        <mat-option  [value]="carrier" *ngFor="let carrier of carriers" (click)="carrierSelected(carrier)">
+                            {{carrier}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="mat-elevation-z5">
+            <mat-table [dataSource]="showTrips">
+                <ng-container matColumnDef="patent">
+                    <mat-header-cell *matHeaderCellDef> Patente </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.patent}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="carrier">
+                    <mat-header-cell *matHeaderCellDef> Transportista </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.carrier}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="total">
+                    <mat-header-cell *matHeaderCellDef > Total </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> ${{element.totalTariff.toLocaleString()}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="detail">
+                    <mat-header-cell *matHeaderCellDef > Detalle </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> 
+                        <button mat-icon-button (click)="detailTrip(element)"><mat-icon>remove_red_eye</mat-icon></button> 
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+            <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
+        </div>
+    </div>
+</ng-template>
+
