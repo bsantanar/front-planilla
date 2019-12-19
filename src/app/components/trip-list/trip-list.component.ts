@@ -13,13 +13,17 @@ import { CarrierService } from 'src/app/services/carrier.service';
 export class TripListComponent implements OnInit {
 
   inputDate: Date;
+  inputTypeTrips: number;
   loading:boolean = false;
   tripsList: Trip[] = [];
-  showTrips: Trip[] = [];
+  alertsList: any[] = [];
+  showTrips: any[] = [];
   displayedColumns: string[] = ['patent', 'carrier', 'total', 'detail'];
+  displayedColumnsAlert: string[] = ['patent', 'carrier', 'method', 'description'];
   carriers: string[] = [];
+  carriersAlerts: string[] = [];
   dataSource;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  //@ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(private tripSevice: TripService, public dialog: MatDialog, 
     private carrierService: CarrierService) { }
@@ -44,9 +48,10 @@ export class TripListComponent implements OnInit {
     this.tripSevice.getTripsByDate(date).subscribe(
       res => {
         this.tripsList = this.showTrips = res['homologationDTOS'];
+        this.alertsList = res['errorDTOS'];
         //console.log(res, this.tripsList);
-        this.dataSource = new MatTableDataSource(this.showTrips);
-        this.dataSource.sort = this.sort;
+        //this.dataSource = new MatTableDataSource(this.showTrips);
+        //this.dataSource.sort = this.sort;
         this.loading = false;
         this.calculateTotalTariff();
       }, err => {
@@ -57,6 +62,7 @@ export class TripListComponent implements OnInit {
 
   calculateTotalTariff(){
     this.carriers = [];
+    this.carriersAlerts = [];
     for (const trip of this.tripsList) {
       let total = 0;
       for (const detail of trip.detail) {
@@ -67,12 +73,32 @@ export class TripListComponent implements OnInit {
         this.carriers.push(trip.carrier);
       }
     }
+    for (const alert of this.alertsList) {
+      if(this.carriersAlerts.indexOf(alert.carrier) === -1){
+        this.carriersAlerts.push(alert.carrier);
+      }
+    }
     this.tripsList.sort((a, b) => {return b.totalTariff - a.totalTariff});
     // this.tripsList.sort(tota);
   }
 
   carrierSelected(carrier){
-    this.showTrips = this.tripsList.filter((trip) => { if(trip.carrier === carrier) return trip }); 
+    if(this.inputTypeTrips == 1){
+      this.showTrips = this.tripsList.filter((trip) => { if(trip.carrier === carrier) return trip }); 
+    } else {
+      this.showTrips = this.alertsList.filter((alert) => { if(alert.carrier === carrier) return alert }); 
+    }
+  }
+
+  typeListSelected(value: number){
+    if(value === 2) {
+      this.inputTypeTrips = 2;
+      this.showTrips = this.alertsList
+    }
+    else {
+      this.inputTypeTrips = 1;
+      this.showTrips = this.tripsList;
+    }
   }
 
   detailTrip(trip: Trip): void {
@@ -84,7 +110,7 @@ export class TripListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      //console.log('The dialog was closed');
     });
   }
 
