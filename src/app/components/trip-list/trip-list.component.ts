@@ -4,6 +4,8 @@ import { MatTableDataSource, MatSort, MatDialog } from '@angular/material';
 import { Trip } from 'src/app/classes/trip';
 import { TripDetailComponent } from '../trip-detail/trip-detail.component';
 import { CarrierService } from 'src/app/services/carrier.service';
+import { Carrier } from 'src/app/classes/carrier';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-trip-list',
@@ -14,50 +16,59 @@ export class TripListComponent implements OnInit {
 
   inputDate: Date;
   inputTypeTrips: number;
+  percentage: number;
   loading:boolean = false;
   tripsList: Trip[] = [];
   alertsList: any[] = [];
   showTrips: any[] = [];
-  displayedColumns: string[] = ['patent', 'carrier', 'total', 'detail'];
+  displayedColumns: string[] = ['patent', 'carrier', 'completed', 'total', 'detail'];
   displayedColumnsAlert: string[] = ['patent', 'carrier', 'method', 'description'];
-  carriers: string[] = [];
-  carriersAlerts: string[] = [];
+  carriers: any[] = [];
+  carriersAlerts: any[] = [];
   dataSource;
   //@ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(private tripSevice: TripService, public dialog: MatDialog, 
-    private carrierService: CarrierService) { }
+    private carrierService: CarrierService, private utils: UtilsService) { }
 
   ngOnInit() {
   }
 
-  parseDate(date: Date){
-    let month = '' + (date.getMonth() + 1), 
-        day = '' + (date.getDate()),
-        year = '' + (date.getFullYear());
-    if(month.length < 2) month = '0' + month;
-    if(day.length < 2) day = '0' + day;
-
-    return [year, month, day].join('-');
-  }
-
   searchReservationsByDate(){
-    let date = this.inputDate.toString();
+    let date = this.utils.parseDate(this.inputDate);
     //let parsedDate = this.parseDate(this.inputDate);
     this.loading = true;
     this.tripSevice.getTripsByDate(date).subscribe(
       res => {
         this.tripsList = this.showTrips = res['homologationDTOS'];
         this.alertsList = res['errorDTOS'];
+        //console.log(res);
         //console.log(res, this.tripsList);
         //this.dataSource = new MatTableDataSource(this.showTrips);
         //this.dataSource.sort = this.sort;
         this.loading = false;
         this.calculateTotalTariff();
+        this.calculatePercentagePaid();
       }, err => {
         console.log(err);
       }
     );
+  }
+
+  calculatePercentagePaid(){
+    for (const trip of this.tripsList) {
+      let acum = 0, completed = 0;
+      for (const detail of trip.detail) {
+        acum += 1;
+        completed += 1;
+      }
+      for (const alert of this.alertsList) {
+        if(alert.patent == trip.patent){
+          acum += 1;
+        }
+      }
+      trip.percentage = Math.round(completed * 100 / acum);
+    }
   }
 
   calculateTotalTariff(){
@@ -67,19 +78,41 @@ export class TripListComponent implements OnInit {
       let total = 0;
       for (const detail of trip.detail) {
         total += detail.tariff;
+        detail.weight = parseFloat(detail.weight.toFixed(2));
       }
       trip.totalTariff = total;
-      if(this.carriers.indexOf(trip.carrier) === -1) {
+      if(this.carriers.indexOf(trip.carrier === -1)){
         this.carriers.push(trip.carrier);
       }
+      //this.loadCarrierObject(trip.carrier, this.tripsList.indexOf(trip), 1);
     }
     for (const alert of this.alertsList) {
       if(this.carriersAlerts.indexOf(alert.carrier) === -1){
         this.carriersAlerts.push(alert.carrier);
       }
     }
+    this.loadAlertCarrierObject();
     this.tripsList.sort((a, b) => {return b.totalTariff - a.totalTariff});
     // this.tripsList.sort(tota);
+  }
+
+  loadAlertCarrierObject(){
+    for (let i = 0; i < this.carriersAlerts.length; i++) {
+      this.carrierService.getCarrierById(this.carriersAlerts[i]).subscribe(
+        res => {
+          //console.log(res);
+            // this.alertsList[index].carrier = res;
+            this.carriersAlerts[i] = res;
+            for (const alert of this.alertsList) {
+              if(alert.carrier == res['carriePk']){
+                alert.carrier = res['carrieName']
+              }
+            }
+        }, err => {
+          return err;
+        }
+      );
+    }
   }
 
   carrierSelected(carrier){

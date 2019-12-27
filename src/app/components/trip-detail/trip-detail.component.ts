@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-trip-detail',
@@ -92,17 +93,20 @@ export class TripDetailComponent implements OnInit {
   //constructor(){}
 
   constructor(public dialogRef: MatDialogRef<TripDetailComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, private utils: UtilsService) { }
 
   ngOnInit() {
+    for (const detail of this.data.detail) {
+      if(detail.locationOrigin){
+        detail.locationOrigin = detail.locationOrigin.toLowerCase();
+        detail.locationOrigin = detail.locationOrigin[0].toUpperCase() + detail.locationOrigin.slice(1);
+        detail.locationDestination = detail.locationDestination.toLowerCase();
+        detail.locationDestination = detail.locationDestination[0].toUpperCase() + detail.locationDestination.slice(1);
+      }
+    }
     //this.data = this.test;
     //console.log(this.data);
   }
-
-  formatNumber (num) {
-    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
-  }
-
 
   onNoClick(): void {
     this.dialogRef.close();

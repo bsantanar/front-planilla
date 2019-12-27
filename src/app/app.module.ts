@@ -12,7 +12,9 @@ import { TripListComponent } from './components/trip-list/trip-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule, MatExpansionModule, MatPaginatorModule, 
   MatSortModule, MatSelectModule, MatIconModule, MatButtonModule, 
-  MatDialogModule, MatCardModule, MatGridListModule, MatRadioModule, } from '@angular/material';
+  MatDialogModule, MatCardModule, MatGridListModule, MatRadioModule, 
+  MatInputModule, MatDatepickerModule, MatNativeDateModule,
+  MAT_DATE_LOCALE} from '@angular/material';
 import { AlertComponent } from './components/alert/alert.component';
 import { TripDetailComponent } from './components/trip-detail/trip-detail.component';
 
@@ -38,26 +40,15 @@ const appRoutes: Routes = [
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
     ),
-    ReactiveFormsModule,
-    HttpClientModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    MatTableModule,
-    MatExpansionModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatSelectModule,
-    MatIconModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatCardModule,
-    MatGridListModule,
-    MatRadioModule
+    ReactiveFormsModule, HttpClientModule, FormsModule, BrowserAnimationsModule,
+    MatTableModule, MatExpansionModule, MatPaginatorModule, MatSortModule, MatSelectModule,
+    MatIconModule, MatButtonModule, MatDialogModule, MatCardModule, MatGridListModule,
+    MatRadioModule, MatInputModule, MatDatepickerModule, MatNativeDateModule
   ],
   entryComponents: [
     TripDetailComponent
   ],
-  providers: [],
+  providers: [{provide: MAT_DATE_LOCALE, useValue: 'es-CL'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

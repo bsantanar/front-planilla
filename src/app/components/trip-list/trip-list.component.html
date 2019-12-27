@@ -3,18 +3,23 @@
 
 <div class="row">
     <div class="col">
-        <h3>Introduce una fecha</h3>
+        <h3>Lista de Viajes</h3>
     </div>
 </div>
 <div class="row mb-4">
-    <div class="col">
-        <div class="input-group flex-nowrap">
-            <div class="input-group-prepend">
-                <label class="input-group-text" for="fecha">Fecha</label>
-            </div>
-            <input type="date" class="form-control" id="fecha" aria-describedby="addon-wrapping" [(ngModel)]="inputDate">
-            <button class="btn btn-danger ml-2" (click)="searchReservationsByDate()">Buscar</button>                    
+    <div class="col-6">
+            <mat-form-field style="width: 100% !important">
+                <input matInput [matDatepicker]="picker" placeholder="Fecha de presentación" [(ngModel)]="inputDate">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <!-- <input type="date" class="form-control" id="fecha" aria-describedby="addon-wrapping" [(ngModel)]="inputDate"> -->
         </div>
+    <div class="col-4">
+        <button class="btn btn-danger ml-2" (click)="searchReservationsByDate()" style="float: right;">
+            Buscar
+        </button>                    
+
     </div>
 </div>
 
@@ -28,11 +33,10 @@
 </div>
 
 <ng-template #loadedItems>
-    
-    <mat-radio-group aria-label="Select an option" [(ngModel)]="inputTypeTrips">
-        <mat-radio-button class="mr-2" value="1" (click)="typeListSelected(1)">Viajes</mat-radio-button>
-        <mat-radio-button class="mr-2" value="2" (click)="typeListSelected(2)">Alertas</mat-radio-button>
-    </mat-radio-group>
+        <mat-radio-group aria-label="Select an option" [(ngModel)]="inputTypeTrips">
+            <mat-radio-button class="mr-2" value="1" (click)="typeListSelected(1)">Viajes</mat-radio-button>
+            <mat-radio-button class="mr-2" value="2" (click)="typeListSelected(2)">Alertas</mat-radio-button>
+        </mat-radio-group>
     <div *ngIf="inputTypeTrips == 1">
             <div class="row">
                 <div class="col-4">
@@ -57,9 +61,16 @@
                         <mat-cell *matCellDef="let element"> {{element.carrier}} </mat-cell>
                     </ng-container>
     
+                    <ng-container matColumnDef="completed">
+                        <mat-header-cell *matHeaderCellDef > Completed </mat-header-cell>
+                        <mat-cell *matCellDef="let element" class="mat-body-strong" [ngClass]="{'text-success': element.percentage == 100, 'text-warning': element.percentage < 100}"> 
+                            {{element.percentage}}%
+                        </mat-cell>
+                    </ng-container>
+
                     <ng-container matColumnDef="total">
                         <mat-header-cell *matHeaderCellDef > Total </mat-header-cell>
-                        <mat-cell *matCellDef="let element"> ${{element.totalTariff.toLocaleString()}} </mat-cell>
+                        <mat-cell *matCellDef="let element" class="text-danger"> ${{utils.formatNumber(element.totalTariff)}} </mat-cell>
                     </ng-container>
     
                     <ng-container matColumnDef="detail">
@@ -81,8 +92,8 @@
                 <mat-form-field>
                     <mat-label>Transportista</mat-label>
                     <mat-select>
-                        <mat-option  [value]="carrier" *ngFor="let carrier of carriersAlerts" (click)="carrierSelected(carrier)">
-                            {{carrier}}
+                        <mat-option  [value]="carrier" *ngFor="let carrier of carriersAlerts" (click)="carrierSelected(carrier.carrieName)">
+                            {{carrier.carrieName}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
