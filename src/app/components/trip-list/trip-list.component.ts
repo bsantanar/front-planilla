@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TripService } from 'src/app/services/trip.service';
-import { MatTableDataSource, MatSort, MatDialog } from '@angular/material';
+import { MatTableDataSource, MatSort, MatDialog, MatPaginator } from '@angular/material';
 import { Trip } from 'src/app/classes/trip';
 import { TripDetailComponent } from '../trip-detail/trip-detail.component';
 import { CarrierService } from 'src/app/services/carrier.service';
@@ -25,11 +25,13 @@ export class TripListComponent implements OnInit {
   displayedColumnsAlert: string[] = ['patent', 'carrier', 'method', 'description'];
   carriers: any[] = [];
   carriersAlerts: any[] = [];
-  dataSource;
+  dataSource = new MatTableDataSource([]);
+
   //@ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(private tripSevice: TripService, public dialog: MatDialog, 
-    private carrierService: CarrierService, private utils: UtilsService) { }
+    private carrierService: CarrierService, private utils: UtilsService) {}
 
   ngOnInit() {
   }
@@ -45,6 +47,8 @@ export class TripListComponent implements OnInit {
         //console.log(res);
         //console.log(res, this.tripsList);
         //this.dataSource = new MatTableDataSource(this.showTrips);
+        this.dataSource.data = this.tripsList;
+        this.dataSource.paginator = this.paginator;
         //this.dataSource.sort = this.sort;
         this.loading = false;
         this.calculateTotalTariff();
