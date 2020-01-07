@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col-4">
+        <mat-form-field>
+            <mat-label>Transportista</mat-label>
+            <mat-select>
+                <mat-option  [value]="carrier" *ngFor="let carrier of carriers" (click)="carrierSelected(carrier)">
+                    {{carrier}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</div>
+<div class="mat-elevation-z5">
+    <mat-table [dataSource]="showElements" matSort>
+        <ng-container matColumnDef="patent">
+            <mat-header-cell *matHeaderCellDef> Patente </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.patent}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="carrier">
+            <mat-header-cell *matHeaderCellDef> Transportista </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.carrier}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="completed">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Completed </mat-header-cell>
+            <mat-cell *matCellDef="let element" class="mat-body-strong" [ngClass]="{'text-success': element.percentage == 100, 'text-warning': element.percentage < 100}"> 
+                {{element.percentage}}%
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="total">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Total </mat-header-cell>
+            <mat-cell *matCellDef="let element" class="text-danger"> ${{utils.formatNumber(element.totalTariff)}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="detail">
+            <mat-header-cell *matHeaderCellDef > Detalle </mat-header-cell>
+            <mat-cell *matCellDef="let element"> 
+                <button mat-icon-button (click)="detailTrip(element)"><mat-icon>remove_red_eye</mat-icon></button> 
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>

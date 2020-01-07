@@ -2,61 +2,61 @@
 
 <mat-dialog-content class="limited-box">
     <p>Puedes revisar el detalle en cada uno de los elementos.</p>
-    <div *ngFor="let detail of data.detail">
+    <div *ngFor="let detail of data.reservationDetail">
         <mat-card class="mb-2">
-            <mat-grid-list cols=6 rowHeight="50px">
+            <mat-grid-list cols=6 rowHeight="3em">
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                     Tienda:
                 </mat-grid-tile>
-                <mat-grid-tile [colspan]="1" [rowspan]="1" class="mat-body-strong">
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
                     {{detail.store}}
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                     N° de Guía:
                 </mat-grid-tile>
-                <mat-grid-tile [colspan]="1" [rowspan]="1" class="mat-body-strong">
+                <mat-grid-tile [colspan]="1" [rowspan]="1" >
                     {{detail.guideNumber}}
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                     Modalidad: 
                 </mat-grid-tile>
-                <mat-grid-tile [colspan]="1" [rowspan]="1" class="mat-body-strong">
+                <mat-grid-tile [colspan]="1" [rowspan]="1" >
                     {{detail.modality}}
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                     Sector:
                 </mat-grid-tile>
-                <mat-grid-tile [colspan]="1" [rowspan]="1" class="mat-body-strong">
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
                     {{detail.sector}}
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                     Nº Reserva:
                 </mat-grid-tile>
-                <mat-grid-tile [colspan]="1" [rowspan]="1" class="mat-body-strong">
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
                     {{detail.reservationNumber}}
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                     Peso:
                 </mat-grid-tile>
-                <mat-grid-tile [colspan]="1" [rowspan]="1" class="mat-body-strong">
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
                     {{detail.weight}} Kg
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                     Recorrido:
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
-                    <small class="mat-body-strong">{{detail.locationOrigin}}-{{detail.locationDestination}}</small> 
+                    <small>{{detail.locationOrigin}}-{{detail.locationDestination}}</small> 
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                     Hoja de Ruta:
                 </mat-grid-tile>
-                <mat-grid-tile [colspan]="1" [rowspan]="1" class="mat-body-strong">
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
                     {{detail.roadNumber}}
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                     Monto:
                 </mat-grid-tile>
-                <mat-grid-tile [colspan]="1" [rowspan]="1" class="mat-body-strong text-danger">
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="text-danger">
                     ${{utils.formatNumber(detail.tariff)}}
                 </mat-grid-tile>
             </mat-grid-list>

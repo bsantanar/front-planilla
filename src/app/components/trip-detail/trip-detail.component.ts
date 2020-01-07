@@ -96,7 +96,7 @@ export class TripDetailComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any, private utils: UtilsService) { }
 
   ngOnInit() {
-    for (const detail of this.data.detail) {
+    for (const detail of this.data.reservationDetail) {
       if(detail.locationOrigin){
         detail.locationOrigin = detail.locationOrigin.toLowerCase();
         detail.locationOrigin = detail.locationOrigin[0].toUpperCase() + detail.locationOrigin.slice(1);

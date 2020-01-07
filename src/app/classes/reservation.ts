@@ -1,5 +1,7 @@
+import { Alert } from './alert';
+
 export interface Reservation {
-    store: number;
+    store: string;
     officeStore: string;
     locationOrigin: string;
     locationDestination: string;
@@ -9,6 +11,6 @@ export interface Reservation {
     sector: string;
     weight: number;
     distance: any;
-    method: string;
+    modality: string;
     tariff: number;
-  }
+}

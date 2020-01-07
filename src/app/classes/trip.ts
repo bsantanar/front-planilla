@@ -1,10 +1,12 @@
 import { Reservation } from './reservation';
+import { Alert } from './alert';
 
 export interface Trip {
     patent: string;
     carrier: any;
     date: Date;
-    detail: Reservation[];
+    reservationDetail: Reservation[];
+    reservationDetailError: Alert[];
     totalTariff: number;
     percentage: number;
   }
