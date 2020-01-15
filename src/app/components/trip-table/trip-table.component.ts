@@ -14,7 +14,7 @@ export class TripTableComponent implements OnInit {
 
   showElements = new MatTableDataSource([]);
 
-  displayedColumns: string[] = ['patent', 'carrier', 'completed', 'total', 'detail'];
+  displayedColumns: string[] = ['patent', 'carrier', 'percentage', 'totalTariff', 'detail'];
   @Input() dataSource: Trip[];
   @Input() carriers: Carrier[];
 
@@ -30,6 +30,7 @@ export class TripTableComponent implements OnInit {
   }
 
   detailTrip(trip: Trip): void {
+    console.log(trip);
     const dialogRef = this.dialog.open(TripDetailComponent, {
       width: '65%',
       height: '80%',
@@ -44,6 +45,10 @@ export class TripTableComponent implements OnInit {
 
   carrierSelected(carrier){
       this.showElements.data = this.dataSource.filter((trip) => { if(trip.carrier === carrier) return trip }); 
+  }
+
+  setFirstPage(){
+    this.showElements.paginator.firstPage();
   }
 
 }

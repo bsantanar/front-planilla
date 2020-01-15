@@ -14,7 +14,7 @@ import { MatTableModule, MatExpansionModule, MatPaginatorModule,
   MatSortModule, MatSelectModule, MatIconModule, MatButtonModule, 
   MatDialogModule, MatCardModule, MatGridListModule, MatRadioModule, 
   MatInputModule, MatDatepickerModule, MatNativeDateModule,
-  MAT_DATE_LOCALE, MatPaginatorIntl} from '@angular/material';
+  MAT_DATE_LOCALE, MatPaginatorIntl, DateAdapter} from '@angular/material';
 import { AlertComponent } from './components/alert/alert.component';
 import { TripDetailComponent } from './components/trip-detail/trip-detail.component';
 import { TripTableComponent } from './components/trip-table/trip-table.component';
@@ -53,7 +53,8 @@ const appRoutes: Routes = [
   entryComponents: [
     TripDetailComponent
   ],
-  providers: [{provide: MAT_DATE_LOCALE, useValue: 'es-CL'},
+  providers: [{provide: MAT_DATE_LOCALE, useValue: 'es-419'},
+    //{provide: DateAdapter,},
     {provide: MatPaginatorIntl, useValue: getSpanishPaginatorIntl()}],
   bootstrap: [AppComponent]
 })

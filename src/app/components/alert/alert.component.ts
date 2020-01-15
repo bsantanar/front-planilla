@@ -8,7 +8,7 @@ import { TripService } from 'src/app/services/trip.service';
 })
 export class AlertComponent implements OnInit {
 
-  inputDate: Date;
+  startDate: Date;
   loading:boolean = false;
   alertList: any[] = [];
   displayedColumns: string[] = ['patent', 'carrier', 'method', 'description'];
@@ -19,10 +19,10 @@ export class AlertComponent implements OnInit {
   }
 
   searchAlertsByDate(){
-    let date = this.inputDate.toString();
+    let date = this.startDate.toString();
     //let parsedDate = this.parseDate(this.inputDate);
     this.loading = true;
-    this.tripSevice.getTripsByDate(date).subscribe(
+    this.tripSevice.getTripsByDate(date, date).subscribe(
       res => {
         this.alertList = res['errorDTOS'];
         console.log(res, this.alertList);

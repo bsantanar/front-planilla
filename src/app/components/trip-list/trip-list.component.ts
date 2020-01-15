@@ -7,6 +7,7 @@ import { CarrierService } from 'src/app/services/carrier.service';
 import { Carrier } from 'src/app/classes/carrier';
 import { UtilsService } from 'src/app/services/utils.service';
 import { Alert } from 'src/app/classes/alert';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-trip-list',
@@ -15,7 +16,11 @@ import { Alert } from 'src/app/classes/alert';
 })
 export class TripListComponent implements OnInit {
 
-  inputDate: Date;
+  startDate: Date;
+  endDate: Date;
+  date: FormControl = new FormControl();
+  maxDate = new Date();
+  minDate = new Date(2018, 0, 1);
   inputTypeTrips: number;
   percentage: number;
   loading:boolean = false;
@@ -35,15 +40,21 @@ export class TripListComponent implements OnInit {
     this.tripsList = this.alertsList = [];
     this.inputTypeTrips = 0;
     this.emptySearch = false;
-    let date = this.utils.parseDate(this.inputDate);
-    //let parsedDate = this.parseDate(this.inputDate);
+    //console.log(this.date.value);
+    let startDateString = this.utils.parseDate(this.startDate);
+    let endDateString = this.utils.parseDate(this.endDate);
     this.loading = true;
-    this.tripSevice.getTripsByDate(date).subscribe(
+    this.tripSevice.getTripsByDate(startDateString, endDateString).subscribe(
       res => {
-        this.tripsList = (res as any).tripDTOS;
-        this.alertsList = (res as any).patentError;
-        if(this.tripsList.length == 0 && this.alertsList.length == 0) this.emptySearch = true;
         console.log(res);
+        for (const resp of (res as any)) {
+          this.tripsList.push(resp.trip.tripDTOS);
+          this.alertsList.push(resp.trip.tripError);
+        }
+        // this.tripsList = (res as any).response[0].trip.tripDTOS;
+        // this.alertsList = (res as any).response[0].trip.tripError;
+        if(this.tripsList.length == 0 && this.alertsList.length == 0) this.emptySearch = true;
+        //console.log(res);
         //console.log(this.tripsList);
         this.loading = false;
         this.calculateTotalTariff();
@@ -69,7 +80,11 @@ export class TripListComponent implements OnInit {
       for(const err of trip.reservationDetailError){
         acum +=1;
       }
-      trip.percentage = Math.round(completed * 100 / acum);
+      if(acum === 0){
+        trip.percentage = 0;
+      } else {
+        trip.percentage = Math.round(completed * 100 / acum);
+      }
     }
   }
 
@@ -100,6 +115,16 @@ export class TripListComponent implements OnInit {
       this.inputTypeTrips = 1;
     }
   }
+
+  keyUp(event: any) {
+    const pattern = /[0-9\+\-\ ]/;
+    let inputChar = String.fromCharCode(event.key);
+
+    if (!pattern.test(inputChar)) {
+      // invalid character, prevent input
+      event.preventDefault();
+    }
+}
 
 
 }

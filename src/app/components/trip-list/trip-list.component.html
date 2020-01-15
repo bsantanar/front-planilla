@@ -7,15 +7,23 @@
     </div>
 </div>
 <div class="row mb-4">
-    <div class="col-6">
-            <mat-form-field style="width: 100% !important">
-                <input matInput [matDatepicker]="picker" placeholder="Fecha de presentación" [(ngModel)]="inputDate">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-            <!-- <input type="date" class="form-control" id="fecha" aria-describedby="addon-wrapping" [(ngModel)]="inputDate"> -->
-        </div>
-    <div class="col-4">
+    <div class="col-3">
+        <mat-form-field style="width: 100% !important">
+            <input matInput [max]="maxDate" [min]="minDate" (click)="picker1.open()" [matDatepicker]="picker1" readonly 
+                placeholder="Fecha de inicio" [(ngModel)]="startDate" style="cursor: pointer;">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1 disabled="false"></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="col-3">
+        <mat-form-field style="width: 100% !important">
+            <input matInput [max]="maxDate" [min]="startDate" (click)="picker2.open()" [matDatepicker]="picker2" 
+                placeholder="Fecha de término" [(ngModel)]="endDate" style="cursor: pointer;">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2 disabled="false"></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="col-3">
         <button class="btn btn-danger ml-2" (click)="searchReservationsByDate()" style="float: left;">
             Buscar
         </button>                    

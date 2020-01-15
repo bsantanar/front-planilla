@@ -11,8 +11,8 @@ export class TripService {
 
   constructor(private http: HttpClient) { }
 
-  public getTripsByDate(date:string){
-    let params = new HttpParams().set("reservationDate", date);
+  public getTripsByDate(startDate:string, endDate: string){
+    let params = new HttpParams().set("startDate", startDate).set("endDate", endDate);
     return this.http.get(this.tripUrl, {params});
   }
 }

@@ -1,0 +1,5 @@
+[click],
+[data-ng-click],
+[x-ng-click] {
+    cursor: move;
+}
