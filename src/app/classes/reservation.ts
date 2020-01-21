@@ -11,6 +11,9 @@ export interface Reservation {
     sector: string;
     weight: number;
     distance: any;
+    dataOrigin: string;
+    dealFK: number;
+    obs: string;
     modality: string;
     tariff: number;
 }

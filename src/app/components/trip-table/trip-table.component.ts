@@ -16,7 +16,6 @@ export class TripTableComponent implements OnInit {
 
   displayedColumns: string[] = ['patent', 'carrier', 'percentage', 'totalTariff', 'detail'];
   @Input() dataSource: Trip[];
-  @Input() carriers: Carrier[];
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -30,7 +29,6 @@ export class TripTableComponent implements OnInit {
   }
 
   detailTrip(trip: Trip): void {
-    console.log(trip);
     const dialogRef = this.dialog.open(TripDetailComponent, {
       width: '65%',
       height: '80%',

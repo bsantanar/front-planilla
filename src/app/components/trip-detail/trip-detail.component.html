@@ -1,8 +1,8 @@
-<h1 mat-dialog-title>Detalle listado de viaje / Patente {{data.patent}} </h1>
+<h1 mat-dialog-title>Detalle listado de viaje / Patente {{patent}} </h1>
 
 <mat-dialog-content class="limited-box">
     <p>Puedes revisar el detalle en cada uno de los elementos.</p>
-    <div *ngFor="let error of data.reservationDetailError">
+    <div *ngFor="let error of listDetailError">
         <mat-card class="mat-elevation-z5 mb-3">
             <mat-grid-list cols=6 rowHeight="3em">
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
@@ -56,7 +56,7 @@
             </mat-grid-list>
         </mat-card>
     </div>
-    <div *ngFor="let detail of data.reservationDetail">
+    <div *ngFor="let detail of listDetail">
         <mat-card class="mat-elevation-z5 mb-3">
             <mat-grid-list cols=6 rowHeight="3em">
                 <mat-grid-tile [colspan]="1" [rowspan]="1">

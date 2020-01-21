@@ -7,6 +7,8 @@ export interface Trip {
     date: Date;
     reservationDetail: Reservation[];
     reservationDetailError: Alert[];
+    locationAproach: any[];
+    locationApproachError: any[];
     totalTariff: number;
     percentage: number;
   }

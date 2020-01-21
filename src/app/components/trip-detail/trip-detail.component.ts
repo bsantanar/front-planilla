@@ -1,6 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { UtilsService } from 'src/app/services/utils.service';
+import { Alert } from 'src/app/classes/alert';
+import { Reservation } from 'src/app/classes/reservation';
 
 @Component({
   selector: 'app-trip-detail',
@@ -9,99 +11,25 @@ import { UtilsService } from 'src/app/services/utils.service';
 })
 export class TripDetailComponent implements OnInit {
 
-  test: any = {
-    "patent": "LKTD11",
-    "carrier": "3746",
-    "date": "2019-12-05",
-    "detail":[
-    {
-    "store": 3,
-    "officeStore": "3.0",
-    "roadNumber": 2006720,
-    "guideNumber": "56170679",
-    "sector": "URBANO 1",
-    "weight": 126,
-    "distance": "",
-    "method": "VENTA EMPRESA",
-    "dealFK": null,
-    "tariff": 4363
-    },
-    {
-    "store": 3,
-    "officeStore": "3.0",
-    "roadNumber": 2006720,
-    "guideNumber": "56170678",
-    "sector": "URBANO 2",
-    "weight": 145,
-    "distance": "",
-    "method": "VENTA EMPRESA",
-    "dealFK": null,
-    "tariff": 6545
-    },
-    {
-    "store": 3,
-    "officeStore": "3.0",
-    "roadNumber": 2006720,
-    "guideNumber": "56170680",
-    "sector": "URBANO 2",
-    "weight": 142,
-    "distance": "",
-    "method": "VENTA EMPRESA",
-    "dealFK": null,
-    "tariff": 6545
-    },
-    {
-    "store": 3,
-    "officeStore": "3.0",
-    "roadNumber": 2006720,
-    "guideNumber": "56170680",
-    "sector": "URBANO 2",
-    "weight": 142,
-    "distance": "",
-    "method": "VENTA EMPRESA",
-    "dealFK": null,
-    "tariff": 6545
-    },
-    {
-    "store": 3,
-    "officeStore": "3.0",
-    "roadNumber": 2006720,
-    "guideNumber": "56170680",
-    "sector": "URBANO 2",
-    "weight": 142,
-    "distance": "",
-    "method": "VENTA EMPRESA",
-    "dealFK": null,
-    "tariff": 6545
-    },
-    {
-    "store": 3,
-    "officeStore": "3.0",
-    "roadNumber": 2006720,
-    "guideNumber": "56170680",
-    "sector": "URBANO 2",
-    "weight": 142,
-    "distance": "",
-    "method": "VENTA EMPRESA",
-    "dealFK": null,
-    "tariff": 6545
-    }
-    ],
-    "locationAproachList": null
-    };
-
-  //constructor(){}
+  listDetailError: Alert[] = [];
+  listDetail: Reservation[] = [];
+  patent: string = "";
 
   constructor(public dialogRef: MatDialogRef<TripDetailComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private utils: UtilsService) { }
 
   ngOnInit() {
-    for (const detail of this.data.reservationDetail) {
-      if(detail.locationOrigin){
-        detail.locationOrigin = detail.locationOrigin.toLowerCase();
-        detail.locationOrigin = detail.locationOrigin[0].toUpperCase() + detail.locationOrigin.slice(1);
-        detail.locationDestination = detail.locationDestination.toLowerCase();
-        detail.locationDestination = detail.locationDestination[0].toUpperCase() + detail.locationDestination.slice(1);
+    if(this.data){
+      this.listDetailError = this.data.reservationDetailError;
+      this.listDetail = this.data.reservationDetail;
+      this.patent = this.data.patent;
+      for (const detail of this.data.reservationDetail) {
+        if(detail.locationOrigin){
+          detail.locationOrigin = detail.locationOrigin.toLowerCase();
+          detail.locationOrigin = detail.locationOrigin[0].toUpperCase() + detail.locationOrigin.slice(1);
+          detail.locationDestination = detail.locationDestination.toLowerCase();
+          detail.locationDestination = detail.locationDestination[0].toUpperCase() + detail.locationDestination.slice(1);
+        }
       }
     }
     //this.data = this.test;

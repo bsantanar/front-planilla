@@ -48,10 +48,10 @@
         </mat-radio-group>
     </div>
     <div *ngIf="inputTypeTrips == 1">
-        <app-trip-table [dataSource]="tripsList" [carriers]="carriers"></app-trip-table>
+        <app-trip-table [dataSource]="tripsList"></app-trip-table>
     </div>
     <div *ngIf="inputTypeTrips == 2">
-        <app-alert-table [dataSource]="alertsList" [carriers]="carriersAlerts"></app-alert-table>
+        <app-alert-table [dataSource]="alertsList"></app-alert-table>
     </div>
 </ng-template>
 

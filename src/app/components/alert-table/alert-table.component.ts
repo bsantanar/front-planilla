@@ -15,7 +15,6 @@ export class AlertTableComponent implements OnInit {
   displayedColumnsAlert: string[] = ['patent', 'dataOrigin', 'modality', 'officeStore', 'obs'];
 
   @Input() dataSource: Alert[];
-  @Input() carriers: Carrier[];
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   
@@ -25,9 +24,5 @@ export class AlertTableComponent implements OnInit {
     this.showElements.data = this.dataSource;
     this.showElements.paginator = this.paginator;
   }
-
-  // carrierSelected(carrier){
-  //   this.showElements.data = this.dataSource.filter((alert) => { if(alert.carrier === carrier) return trip }); 
-  // }
 
 }

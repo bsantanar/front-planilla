@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class CarrierService {
 
-  carrierUrl = environment.apiUrl + 'carrier/';
+  private carrierUrl = environment.apiUrl + 'carrier/';
 
   constructor(private http: HttpClient) { }
 

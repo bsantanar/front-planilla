@@ -1,10 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { TripService } from 'src/app/services/trip.service';
-import { MatTableDataSource, MatSort, MatDialog, MatPaginator } from '@angular/material';
 import { Trip } from 'src/app/classes/trip';
-import { TripDetailComponent } from '../trip-detail/trip-detail.component';
 import { CarrierService } from 'src/app/services/carrier.service';
-import { Carrier } from 'src/app/classes/carrier';
 import { UtilsService } from 'src/app/services/utils.service';
 import { Alert } from 'src/app/classes/alert';
 import { FormControl } from '@angular/forms';
@@ -48,8 +45,14 @@ export class TripListComponent implements OnInit {
       res => {
         console.log(res);
         for (const resp of (res as any)) {
-          this.tripsList.push(resp.trip.tripDTOS);
-          this.alertsList.push(resp.trip.tripError);
+          for (const trip of resp.trip.tripDTOS) {
+            this.tripsList.push(trip);
+          }
+          for (const trip of resp.trip.tripError) {
+            this.alertsList.push(trip);
+          }
+          //this.tripsList.push(resp.trip.tripDTOS);
+          //this.alertsList.push(resp.trip.tripError);
         }
         // this.tripsList = (res as any).response[0].trip.tripDTOS;
         // this.alertsList = (res as any).response[0].trip.tripError;
@@ -59,8 +62,10 @@ export class TripListComponent implements OnInit {
         this.loading = false;
         this.calculateTotalTariff();
         this.calculatePercentagePaid();
+        //return res;
       }, err => {
-        console.log(err);
+        this.loading = false;
+        //console.log(err);
       }
     );
   }
@@ -115,16 +120,5 @@ export class TripListComponent implements OnInit {
       this.inputTypeTrips = 1;
     }
   }
-
-  keyUp(event: any) {
-    const pattern = /[0-9\+\-\ ]/;
-    let inputChar = String.fromCharCode(event.key);
-
-    if (!pattern.test(inputChar)) {
-      // invalid character, prevent input
-      event.preventDefault();
-    }
-}
-
 
 }
