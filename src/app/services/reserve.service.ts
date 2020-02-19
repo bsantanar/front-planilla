@@ -5,14 +5,13 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class CarrierService {
+export class ReserveService {
 
-  private carrierUrl = environment.apiUrl + 'carrier/';
+  private reserveUrl = environment.apiUrl + 'reservation';
 
   constructor(private http: HttpClient) { }
 
-  getCarrierById(id: number){
-    return this.http.get(this.carrierUrl + id);
+  public updateReserveTariff(reserve: any){
+    return this.http.put(this.reserveUrl + '/rate', reserve);
   }
-
 }

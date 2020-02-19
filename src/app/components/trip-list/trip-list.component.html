@@ -17,10 +17,10 @@
     </div>
     <div class="col-3">
         <mat-form-field style="width: 100% !important">
-            <input matInput [max]="maxDate" [min]="startDate" (click)="picker2.open()" [matDatepicker]="picker2" 
+            <input matInput [max]="maxDate" [min]="startDate" (click)="picker2.open()" [matDatepicker]="picker2" readonly
                 placeholder="Fecha de término" [(ngModel)]="endDate" style="cursor: pointer;">
             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-            <mat-datepicker #picker2 disabled="false"></mat-datepicker>
+            <mat-datepicker #picker2 disabled="false" [startAt]="startDate" ></mat-datepicker>
         </mat-form-field>
     </div>
     <div class="col-3">
@@ -41,21 +41,19 @@
 </div>
 
 <ng-template #loadedItems>
-    <div *ngIf="tripsList.length > 0 || alertsList.length > 0">
-        <mat-radio-group aria-label="Select an option" [(ngModel)]="inputTypeTrips">
-            <mat-radio-button class="mr-2" value="1" (click)="typeListSelected(1)">Viajes</mat-radio-button>
-            <mat-radio-button class="mr-2" value="2" (click)="typeListSelected(2)">Alertas</mat-radio-button>
-        </mat-radio-group>
-    </div>
-    <div *ngIf="inputTypeTrips == 1">
-        <app-trip-table [dataSource]="tripsList"></app-trip-table>
-    </div>
-    <div *ngIf="inputTypeTrips == 2">
-        <app-alert-table [dataSource]="alertsList"></app-alert-table>
+    <div *ngIf="tripsByDates.length > 0 || alertsList.length > 0">
+        <mat-radio-button class="mr-2" value="1" (click)="typeListSelected(1)" [checked]="true">Viajes</mat-radio-button>
+        <mat-radio-button class="mr-2" value="2" (click)="typeListSelected(2)">Alertas</mat-radio-button>
+        <div *ngIf="inputTypeTrips == 1">
+            <app-trip-table [dataSource]="tripsByDates" [carriers]="carriers"></app-trip-table>
+        </div>
+        <div *ngIf="inputTypeTrips == 2">
+            <app-alert-table [dataSource]="alertsList"></app-alert-table>
+        </div>
     </div>
 </ng-template>
 
 <div *ngIf="emptySearch">
-    <h2>No records for this date</h2>
+    <h2>Sin registros para esta fecha</h2>
 </div>
 

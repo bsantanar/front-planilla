@@ -5,6 +5,7 @@ import { CarrierService } from 'src/app/services/carrier.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { Alert } from 'src/app/classes/alert';
 import { FormControl } from '@angular/forms';
+import { TripRange } from 'src/app/classes/trip-range';
 
 @Component({
   selector: 'app-trip-list',
@@ -13,8 +14,8 @@ import { FormControl } from '@angular/forms';
 })
 export class TripListComponent implements OnInit {
 
-  startDate: Date;
-  endDate: Date;
+  startDate: Date = new Date(2020, 0, 2);
+  endDate: Date = new Date(2020, 0, 2);
   date: FormControl = new FormControl();
   maxDate = new Date();
   minDate = new Date(2018, 0, 1);
@@ -24,6 +25,7 @@ export class TripListComponent implements OnInit {
   emptySearch: boolean = false;
   tripsList: Trip[] = [];
   alertsList: Alert[] = [];
+  tripsByDates: TripRange[] = [];
   carriers: any[] = [];
   carriersAlerts: any[] = [];
 
@@ -34,7 +36,9 @@ export class TripListComponent implements OnInit {
   }
 
   searchReservationsByDate(){
-    this.tripsList = this.alertsList = [];
+    this.tripsList = [];
+    this.alertsList = [];
+    this.tripsByDates = [];
     this.inputTypeTrips = 0;
     this.emptySearch = false;
     //console.log(this.date.value);
@@ -43,13 +47,17 @@ export class TripListComponent implements OnInit {
     this.loading = true;
     this.tripSevice.getTripsByDate(startDateString, endDateString).subscribe(
       res => {
-        console.log(res);
+        //console.log(res);
         for (const resp of (res as any)) {
-          for (const trip of resp.trip.tripDTOS) {
-            this.tripsList.push(trip);
+          if(resp.tripDTOS){
+            for (const trip of resp.tripDTOS) {
+              this.tripsList.push(trip);
+            }
           }
-          for (const trip of resp.trip.tripError) {
-            this.alertsList.push(trip);
+          if(resp.tripError){
+            for (const trip of resp.tripError) {
+              this.alertsList.push(trip);
+            }
           }
           //this.tripsList.push(resp.trip.tripDTOS);
           //this.alertsList.push(resp.trip.tripError);
@@ -61,6 +69,8 @@ export class TripListComponent implements OnInit {
         //console.log(this.tripsList);
         this.loading = false;
         this.calculateTotalTariff();
+        this.inputTypeTrips = 1;
+        this.joinTripsByPatent();
         this.calculatePercentagePaid();
         //return res;
       }, err => {
@@ -70,25 +80,48 @@ export class TripListComponent implements OnInit {
     );
   }
 
-  calculatePercentagePaid(){
+  joinTripsByPatent(){
+    let readyPatents = [];
     for (const trip of this.tripsList) {
-      let acum = 0, completed = 0;
-      for (const detail of trip.reservationDetail) {
-        acum += 1;
-        completed += 1;
+      if(readyPatents.indexOf(trip.patent) === -1){
+        readyPatents.push(trip.patent);
+        let tripByDate: TripRange = {
+          trips: [],
+          patent: trip.patent,
+          totalTariff: 0,
+          carrier: trip.carrier,
+          percentage: 0
+        };
+        tripByDate.trips = this.tripsList.filter(a => a.patent == trip.patent);
+        for (const trip of tripByDate.trips) {
+          tripByDate.totalTariff += trip.totalVal;
+        }
+        this.tripsByDates.push(tripByDate);
       }
-      for (const alert of this.alertsList) {
-        if(alert.patent == trip.patent){
+    }
+  }
+
+  calculatePercentagePaid(){
+    for (const tripByDate of this.tripsByDates) {
+      let acum = 0, completed = 0;
+      for (const trip of tripByDate.trips) {
+        for (const detail of trip.reservationDetail) {
           acum += 1;
+          completed += 1;
+        }
+        // for (const alert of this.alertsList) {
+        //   if(alert.patent == trip.patent){
+        //     acum += 1;
+        //   }
+        // }
+        for(const err of trip.reservationDetailError){
+          acum +=1;
         }
       }
-      for(const err of trip.reservationDetailError){
-        acum +=1;
-      }
       if(acum === 0){
-        trip.percentage = 0;
+        tripByDate.percentage = 0;
       } else {
-        trip.percentage = Math.round(completed * 100 / acum);
+        tripByDate.percentage = Math.round(completed * 100 / acum);
       }
     }
   }
@@ -97,18 +130,20 @@ export class TripListComponent implements OnInit {
     this.carriers = [];
     this.carriersAlerts = [];
     for (const trip of this.tripsList) {
-      let total = 0;
+      //let total = 0;
       for (const detail of trip.reservationDetail) {
-        total += detail.tariff;
+        detail.date = trip.date;
+        //total += detail.tariff;
         detail.weight = parseFloat(detail.weight.toFixed(2));
       }
-      trip.totalTariff = total;
+      //trip.totalVal = total;
       if(this.carriers.indexOf(trip.carrier) === -1){
+        //console.log(this.carriers);
         this.carriers.push(trip.carrier);
       }
       //this.loadCarrierObject(trip.carrier, this.tripsList.indexOf(trip), 1);
     }
-    this.tripsList.sort((a, b) => {return b.totalTariff - a.totalTariff});
+    this.tripsList.sort((a, b) => {return b.totalVal - a.totalVal});
     // this.tripsList.sort(tota);
   }
 

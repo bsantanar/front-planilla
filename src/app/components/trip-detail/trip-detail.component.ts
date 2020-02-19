@@ -3,6 +3,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { UtilsService } from 'src/app/services/utils.service';
 import { Alert } from 'src/app/classes/alert';
 import { Reservation } from 'src/app/classes/reservation';
+import { ReserveService } from 'src/app/services/reserve.service';
+import { TripRange } from 'src/app/classes/trip-range';
 
 @Component({
   selector: 'app-trip-detail',
@@ -16,21 +18,21 @@ export class TripDetailComponent implements OnInit {
   patent: string = "";
 
   constructor(public dialogRef: MatDialogRef<TripDetailComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private utils: UtilsService) { }
+    @Inject(MAT_DIALOG_DATA) public data: TripRange, private utils: UtilsService, 
+    private reserveService: ReserveService) { }
 
   ngOnInit() {
+    console.log(this.data);
     if(this.data){
-      this.listDetailError = this.data.reservationDetailError;
-      this.listDetail = this.data.reservationDetail;
-      this.patent = this.data.patent;
-      for (const detail of this.data.reservationDetail) {
-        if(detail.locationOrigin){
-          detail.locationOrigin = detail.locationOrigin.toLowerCase();
-          detail.locationOrigin = detail.locationOrigin[0].toUpperCase() + detail.locationOrigin.slice(1);
-          detail.locationDestination = detail.locationDestination.toLowerCase();
-          detail.locationDestination = detail.locationDestination[0].toUpperCase() + detail.locationDestination.slice(1);
-        }
+      for (const trip of this.data.trips) {
+        trip.reservationDetail.forEach(detail => {
+          this.listDetail.push(detail);
+        });
+        trip.reservationDetailError.forEach(detailError => {
+          this.listDetailError.push(detailError);
+        });
       }
+      this.patent = this.data.patent;
     }
     //this.data = this.test;
     //console.log(this.data);

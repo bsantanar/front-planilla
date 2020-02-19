@@ -1,5 +1,6 @@
 import { Reservation } from './reservation';
 import { Alert } from './alert';
+import { Approach } from './approach';
 
 export interface Trip {
     patent: string;
@@ -7,8 +8,8 @@ export interface Trip {
     date: Date;
     reservationDetail: Reservation[];
     reservationDetailError: Alert[];
-    locationAproach: any[];
-    locationApproachError: any[];
-    totalTariff: number;
+    locationApproach: Approach[];
+    locationApproachError: Approach[];
+    totalVal: number;
     percentage: number;
   }

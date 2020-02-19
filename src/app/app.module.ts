@@ -14,12 +14,17 @@ import { MatTableModule, MatExpansionModule, MatPaginatorModule,
   MatSortModule, MatSelectModule, MatIconModule, MatButtonModule, 
   MatDialogModule, MatCardModule, MatGridListModule, MatRadioModule, 
   MatInputModule, MatDatepickerModule, MatNativeDateModule,
-  MAT_DATE_LOCALE, MatPaginatorIntl, DateAdapter} from '@angular/material';
+  MAT_DATE_LOCALE, MatPaginatorIntl, DateAdapter, MatTabsModule} from '@angular/material';
 import { AlertComponent } from './components/alert/alert.component';
 import { TripDetailComponent } from './components/trip-detail/trip-detail.component';
 import { TripTableComponent } from './components/trip-table/trip-table.component';
 import { AlertTableComponent } from './components/alert-table/alert-table.component';
 import { getSpanishPaginatorIntl } from './locale/spanish-paginator-intl';
+import { ReserveComponent } from './components/reserve/reserve.component';
+import { ReserveErrorComponent } from './components/reserve-error/reserve-error.component';
+import { ApproachDetailComponent } from './components/approach-detail/approach-detail.component';
+import { ApproachComponent } from './components/approach/approach.component';
+import { ApproachErrorComponent } from './components/approach-error/approach-error.component';
 
 
 
@@ -37,7 +42,12 @@ const appRoutes: Routes = [
     AlertComponent,
     TripDetailComponent,
     TripTableComponent,
-    AlertTableComponent
+    AlertTableComponent,
+    ReserveComponent,
+    ReserveErrorComponent,
+    ApproachDetailComponent,
+    ApproachComponent,
+    ApproachErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -48,10 +58,11 @@ const appRoutes: Routes = [
     ReactiveFormsModule, HttpClientModule, FormsModule, BrowserAnimationsModule,
     MatTableModule, MatExpansionModule, MatPaginatorModule, MatSortModule, MatSelectModule,
     MatIconModule, MatButtonModule, MatDialogModule, MatCardModule, MatGridListModule,
-    MatRadioModule, MatInputModule, MatDatepickerModule, MatNativeDateModule
+    MatRadioModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatTabsModule 
   ],
   entryComponents: [
-    TripDetailComponent
+    TripDetailComponent,
+    ApproachDetailComponent
   ],
   providers: [{provide: MAT_DATE_LOCALE, useValue: 'es-419'},
     //{provide: DateAdapter,},

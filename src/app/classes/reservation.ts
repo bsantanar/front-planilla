@@ -16,4 +16,5 @@ export interface Reservation {
     obs: string;
     modality: string;
     tariff: number;
+    date: Date;
 }

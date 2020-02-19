@@ -7,12 +7,12 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 })
 export class TripService {
 
-  private tripUrl = environment.apiUrl + 'reservation/bydate';
+  private tripUrl = environment.apiUrl + 'trip';
 
   constructor(private http: HttpClient) { }
 
   public getTripsByDate(startDate:string, endDate: string){
     let params = new HttpParams().set("startDate", startDate).set("endDate", endDate);
-    return this.http.get(this.tripUrl, {params});
+    return this.http.get(this.tripUrl + '/bydate', {params});
   }
 }

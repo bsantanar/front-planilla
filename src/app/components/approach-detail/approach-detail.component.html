@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>Detalle acercamientos de viaje / Patente {{patent}} </h1>
+<mat-dialog-content>
+    <mat-tab-group mat-stretch-tabs dynamicHeight>
+        <mat-tab  label="Valorizados">
+            <div *ngFor="let approach of approachList">
+                <app-approach [approach]="approach"></app-approach>   
+            </div> 
+            <div *ngIf="approachList.length == 0">
+                <h2 class="mt-2 ml-2">Sin acercamientos valorizados</h2>
+            </div>
+        </mat-tab>
+        <mat-tab label="Sin Valorizar">
+            <div *ngFor="let error of approachErrorList">
+                <app-approach-error [error]="error"></app-approach-error>    
+            </div>
+            <div *ngIf="approachErrorList.length == 0">
+                <h2 class="mt-2 ml-2">Sin acercamientos no valorizados</h2>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Volver</button>
+</mat-dialog-actions>
