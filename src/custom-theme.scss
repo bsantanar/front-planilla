@@ -1,0 +1,106 @@
+@import '~@angular/material/theming';
+
+$custom-typography: mat-typography-config(
+  $font-family: 'Lato, sans-serif'
+);
+
+@include mat-core($custom-typography);
+
+$mat-custom-palette-blue: (
+  50: #e2eaf8,
+  100: #b6caed,
+  200: #86a6e1,
+  300: #5582d4,
+  400: #3068cb,
+  500: #0072ce,
+  600: #0a46bc,
+  700: #083db4,
+  800: #0634ac,
+  900: #03259f,
+  A100: #c9d2ff,
+  A200: #96a7ff,
+  A400: #637cff,
+  A700: #4a66ff,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+
+$mat-custom-palette-red: (
+  50: #fbe0e4,
+  100: #f5b3bc,
+  200: #ee8090,
+  300: #e74d64,
+  400: #e22642,
+  500: #dd0021,
+  600: #d9001d,
+  700: #d40018,
+  800: #cf0014,
+  900: #c7000b,
+  A100: #ffefef,
+  A200: #ffbcbd,
+  A400: #ff898b,
+  A700: #ff6f72,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  ));
+
+
+
+$tms-task-manager-primary: mat-palette($mat-custom-palette-blue);
+$tms-task-manager-accent: mat-palette($mat-custom-palette-blue, A200, A100, A400);
+$tms-task-manager-mutted: mat-palette($mat-custom-palette-blue, 50);
+$tms-task-manager-info: mat-palette($mat-custom-palette-blue, 100);
+$tms-task-manager-textinfo: mat-palette($mat-custom-palette-blue, 800);
+$tms-task-manager-warn: mat-palette($mat-custom-palette-red);
+
+$tms-task-manager-theme: mat-light-theme($tms-task-manager-primary, $tms-task-manager-accent, $tms-task-manager-warn);
+
+@include angular-material-theme($tms-task-manager-theme);
+
+$primary: mat-color($tms-task-manager-primary);
+$accent: mat-color($tms-task-manager-accent);
+$warn: mat-color($tms-task-manager-warn);
+$mutted: mat-color($tms-task-manager-mutted);
+
+$info: #CCE5FF;
+$textinfo: #004085;
+$success: #D4EDDA;
+$textsuccess: #5E9E66;
+$alert:#FFF7BD;
+$textalert:#B88F41;
+$error:#F8CCD3;
+$texterror:#DD0021;
+
+$ajustment: #fff5bf;
+$black: #595959;
+$grey: #dbdbdb;
+$green: #4dbd63;
+$icon-btn-color: #757575;

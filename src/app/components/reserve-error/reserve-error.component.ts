@@ -4,7 +4,7 @@ import { ReserveService } from 'src/app/services/reserve.service';
 @Component({
   selector: 'app-reserve-error',
   templateUrl: './reserve-error.component.html',
-  styleUrls: ['./reserve-error.component.css']
+  styleUrls: ['./reserve-error.component.scss']
 })
 export class ReserveErrorComponent implements OnInit {
 

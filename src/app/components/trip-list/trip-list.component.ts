@@ -10,12 +10,12 @@ import { TripRange } from 'src/app/classes/trip-range';
 @Component({
   selector: 'app-trip-list',
   templateUrl: './trip-list.component.html',
-  styleUrls: ['./trip-list.component.css']
+  styleUrls: ['./trip-list.component.scss']
 })
 export class TripListComponent implements OnInit {
 
-  startDate: Date = new Date(2020, 0, 2);
-  endDate: Date = new Date(2020, 0, 2);
+  startDate: Date = new Date(2020, 1, 3);
+  endDate: Date = new Date(2020, 1, 3);
   date: FormControl = new FormControl();
   maxDate = new Date();
   minDate = new Date(2018, 0, 1);

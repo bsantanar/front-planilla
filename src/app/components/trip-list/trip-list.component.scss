@@ -1,0 +1,13 @@
+@import '../../../forms.scss';
+
+[click],
+[data-ng-click],
+[x-ng-click] {
+    cursor: move;
+}
+
+button {
+    width: 10em;
+    height: 3em;
+    margin: 0.5em;
+}

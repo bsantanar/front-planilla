@@ -6,7 +6,7 @@ import { Alert } from 'src/app/classes/alert';
 @Component({
   selector: 'app-alert-table',
   templateUrl: './alert-table.component.html',
-  styleUrls: ['./alert-table.component.css']
+  styleUrls: ['./alert-table.component.scss']
 })
 export class AlertTableComponent implements OnInit {
 

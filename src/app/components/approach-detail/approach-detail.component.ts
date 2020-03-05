@@ -7,7 +7,7 @@ import { Approach } from 'src/app/classes/approach';
 @Component({
   selector: 'app-approach-detail',
   templateUrl: './approach-detail.component.html',
-  styleUrls: ['./approach-detail.component.css']
+  styleUrls: ['./approach-detail.component.scss']
 })
 export class ApproachDetailComponent implements OnInit {
 

@@ -9,7 +9,7 @@ import { TripRange } from 'src/app/classes/trip-range';
 @Component({
   selector: 'app-trip-detail',
   templateUrl: './trip-detail.component.html',
-  styleUrls: ['./trip-detail.component.css']
+  styleUrls: ['./trip-detail.component.scss']
 })
 export class TripDetailComponent implements OnInit {
 

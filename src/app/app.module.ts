@@ -14,7 +14,7 @@ import { MatTableModule, MatExpansionModule, MatPaginatorModule,
   MatSortModule, MatSelectModule, MatIconModule, MatButtonModule, 
   MatDialogModule, MatCardModule, MatGridListModule, MatRadioModule, 
   MatInputModule, MatDatepickerModule, MatNativeDateModule,
-  MAT_DATE_LOCALE, MatPaginatorIntl, DateAdapter, MatTabsModule} from '@angular/material';
+  MAT_DATE_LOCALE, MatPaginatorIntl, DateAdapter, MatTabsModule, MatProgressSpinnerModule} from '@angular/material';
 import { AlertComponent } from './components/alert/alert.component';
 import { TripDetailComponent } from './components/trip-detail/trip-detail.component';
 import { TripTableComponent } from './components/trip-table/trip-table.component';
@@ -58,7 +58,8 @@ const appRoutes: Routes = [
     ReactiveFormsModule, HttpClientModule, FormsModule, BrowserAnimationsModule,
     MatTableModule, MatExpansionModule, MatPaginatorModule, MatSortModule, MatSelectModule,
     MatIconModule, MatButtonModule, MatDialogModule, MatCardModule, MatGridListModule,
-    MatRadioModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatTabsModule 
+    MatRadioModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatTabsModule,
+    MatProgressSpinnerModule 
   ],
   entryComponents: [
     TripDetailComponent,

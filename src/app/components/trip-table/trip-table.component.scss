@@ -1,0 +1,49 @@
+@import '../../../forms.scss';
+
+.mat-header-cell {
+  flex-direction: column;
+  justify-content: center;
+}
+  
+.mat-cell {
+  text-align: center;
+  justify-content:center;
+}
+
+.form_field {
+  flex: 1;
+  width: 20%;
+  @include media-breakpoint-down(sm) {
+    flex: 1;
+    width:100%
+  }
+
+  & button {
+    width: 100%;
+    margin-bottom: 1.34375em;
+  }
+}
+  
+.textsuccess {
+  color: green;
+}
+
+.alert {
+  color:orange;
+}
+
+.textdanger{
+  color: red;
+}
+
+.icon-blue{
+  color: #005fae;
+}
+
+// .mat-row:hover {
+//   background-color: $primary;
+//   cursor: pointer;
+//   & .mat-cell {
+//     color: #f5f8fd;;
+//   }
+// }

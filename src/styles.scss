@@ -1,0 +1,235 @@
+@import './bootstrap.scss';
+@import './custom-theme.scss';
+
+
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+
+:root {
+
+    box-sizing: border-box;
+    font-size: calc(1vmin + 0.6rem);
+
+     @include media-breakpoint-up(md) {
+      font-size: 14px;
+    }
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: 'Lato', sans-serif; }
+
+.container {
+
+  @include media-breakpoint-up(lg) {
+      padding: 4em;
+  }
+
+  @include media-breakpoint-up(xs) {
+      padding: 2em;
+  }
+
+  height: 100vh;
+}
+
+h1,h2,h3 {
+  color: $primary;
+}
+
+h3 {
+  font-weight: 400;
+}
+
+.title {
+
+  color: $primary;
+  font-weight: 400;
+  display: block;
+
+}
+
+.table-title {
+  color: $black;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.sub-title {
+  display: flex;
+  color:  $primary;
+  font-weight: 400;
+  flex-direction: row;
+  align-items: center;
+}
+
+.sub-title_text{
+  font-weight: 400;
+}
+
+.global-dialog-container {
+  padding: 2em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 40vw;
+
+  @include media-breakpoint-up(lg) {
+    position: relative;
+    max-width: 70%;
+    margin: 0 auto;
+  }
+
+  & h1,h2,h3 {
+    margin-top: 0;
+  }
+
+}
+
+.dialog-container .mat-dialog-container {
+
+  @extend .global-dialog-container;
+
+}
+
+.dialog-container-shipment-connections .mat-dialog-container {
+
+  @extend .global-dialog-container;
+
+  @include media-breakpoint-up(lg) {
+    width: 60vw;
+  }
+}
+
+.dialog-container-error-modal .mat-dialog-container {
+
+  @extend .global-dialog-container;
+
+  @include media-breakpoint-up(lg) {
+    width: 65vw;
+
+  }
+}
+
+.mat-spinner  {
+  margin: 5em auto;
+
+}
+
+.mat-paginator {
+  margin-top: 1.5em;
+}
+
+.mat-icon {
+  cursor: pointer;
+}
+
+//  .mat-row:hover {
+//   background-color: $primary;
+//   cursor: pointer;
+//   & .mat-cell {
+//     color: $light-primary-text;
+//   }
+// }
+
+.actions {
+  text-align: center;
+  margin: 1em;
+  @include media-breakpoint-up(lg) {
+      text-align: right;
+  }
+}
+
+.swal2-styled.swal2-confirm {
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+              0px 2px 2px 0px rgba(0, 0, 0, 0.14),
+              0px 1px 5px 0px rgba(0, 0, 0, 0.12) !important;
+  background-color: $primary !important;
+}
+
+.swal2-styled.swal2-cancel {
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+              0px 2px 2px 0px rgba(0, 0, 0, 0.14),
+              0px 1px 5px 0px rgba(0, 0, 0, 0.12) !important;
+  background-color: $warn !important;
+}
+
+.mat-menu-panel{
+  padding:10px;
+  background-color: $primary;
+  color: #ffffff;
+}
+
+.warning-text {
+  color: $warn !important;
+}
+
+.mat-table {
+  width: 100%;
+}
+
+.close {
+  display: block;
+  text-align: right;
+}
+
+.icon-btn {
+  color: $icon-btn-color
+}
+
+.mat-tab-label {
+  flex: 1;
+}
+
+.remove-icon {
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  margin-right: 0.5em;
+
+}
+
+.mat-tab-body {
+  min-height: 550px;
+}
+
+.mat-radio-button {
+  color: $primary;
+  display: block;
+  padding-right: 60px;
+  margin-top: 10px;
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle{
+  background-color: $primary;
+  border-radius: solid 10px;
+}
+
+.mat-radio-label-content{
+  font-weight: 500;
+  font-size:1.1em;
+  padding-left: 8px !important;
+}
+
+.smallRadio .mat-radio-container{
+    height: 10px;
+    width: 10px;
+}
+.smallRadio .mat-radio-outer-circle{
+    height: 10px;
+    width: 10px;
+}
+.smallRadio .mat-radio-inner-circle{
+    height: 10px;
+    width: 10px;
+}
+.smallRadio .mat-radio-button .mat-radio-ripple{
+    height: 20px;
+    width: 20px;
+    left: calc(50% - 10px);
+    top: calc(50% - 10px);
+}
+

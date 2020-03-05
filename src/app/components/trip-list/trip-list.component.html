@@ -2,55 +2,59 @@
 <!-- <button class="btn btn-success"(click)="test()">test</button> -->
 
 <div class="row">
-    <div class="col">
-        <h3>Lista de Viajes</h3>
+    <div class="col-md-6">
+        <h1>Lista de Viajes</h1>
     </div>
 </div>
-<div class="row mb-4">
-    <div class="col-3">
-        <mat-form-field style="width: 100% !important">
+<div class="form">
+    <div class="form_field">
+        <mat-form-field appearance="outline" >
             <input matInput [max]="maxDate" [min]="minDate" (click)="picker1.open()" [matDatepicker]="picker1" readonly 
                 placeholder="Fecha de inicio" [(ngModel)]="startDate" style="cursor: pointer;">
             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
             <mat-datepicker #picker1 disabled="false"></mat-datepicker>
         </mat-form-field>
-    </div>
-    <div class="col-3">
-        <mat-form-field style="width: 100% !important">
+    </div> 
+    <div class="form_field">
+        <mat-form-field appearance="outline">
             <input matInput [max]="maxDate" [min]="startDate" (click)="picker2.open()" [matDatepicker]="picker2" readonly
                 placeholder="Fecha de término" [(ngModel)]="endDate" style="cursor: pointer;">
             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
             <mat-datepicker #picker2 disabled="false" [startAt]="startDate" ></mat-datepicker>
         </mat-form-field>
     </div>
-    <div class="col-3">
-        <button class="btn btn-danger ml-2" (click)="searchReservationsByDate()" style="float: left;">
+    <div class="form_field">
+        <button mat-raised-button color="warn" (click)="searchReservationsByDate()" style="float: left;">
             Buscar
         </button>                    
-
+    </div>
+    <div class="form_field">
+        <div *ngIf="tripsByDates.length > 0 || alertsList.length > 0">
+            <mat-radio-button class="mr-2" value="1" (click)="typeListSelected(1)" [checked]="true">Viajes</mat-radio-button>
+            <mat-radio-button class="mr-2" value="2" (click)="typeListSelected(2)">Alertas</mat-radio-button>
+            <div *ngIf="inputTypeTrips == 1">
+                <app-trip-table [dataSource]="tripsByDates" [carriers]="carriers"></app-trip-table>
+            </div>
+            <div *ngIf="inputTypeTrips == 2">
+                <app-alert-table [dataSource]="alertsList"></app-alert-table>
+            </div>
+        </div>
     </div>
 </div>
 
 <div *ngIf="loading; else loadedItems">
     <div class="d-flex justify-content-center">
-        <div class="spinner-border" role="status">
+        <mat-spinner></mat-spinner>
+
+        <!-- <div class="spinner-border" role="status">
             <span class="sr-only">Loading...</span>
-        </div>
+        </div> -->
     </div>
     
 </div>
 
 <ng-template #loadedItems>
-    <div *ngIf="tripsByDates.length > 0 || alertsList.length > 0">
-        <mat-radio-button class="mr-2" value="1" (click)="typeListSelected(1)" [checked]="true">Viajes</mat-radio-button>
-        <mat-radio-button class="mr-2" value="2" (click)="typeListSelected(2)">Alertas</mat-radio-button>
-        <div *ngIf="inputTypeTrips == 1">
-            <app-trip-table [dataSource]="tripsByDates" [carriers]="carriers"></app-trip-table>
-        </div>
-        <div *ngIf="inputTypeTrips == 2">
-            <app-alert-table [dataSource]="alertsList"></app-alert-table>
-        </div>
-    </div>
+    
 </ng-template>
 
 <div *ngIf="emptySearch">

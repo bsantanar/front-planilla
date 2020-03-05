@@ -1,6 +1,6 @@
 <div class="row">
-    <div class="col-4">
-        <mat-form-field>
+    <div class="form_field">
+        <mat-form-field appearance="outline">
             <mat-label>Transportista</mat-label>
             <mat-select>
                 <mat-option  [value]="carrier" *ngFor="let carrier of carriers" (click)="carrierSelected(carrier)">
@@ -23,27 +23,27 @@
 
         <ng-container matColumnDef="percentage">
             <mat-header-cell *matHeaderCellDef mat-sort-header (click)="setFirstPage()"> COMPLETADO </mat-header-cell>
-            <mat-cell *matCellDef="let element" class="mat-body-strong" [ngClass]="{'text-success': element.percentage == 100, 'text-warning': element.percentage < 100}"> 
+            <mat-cell *matCellDef="let element" class="mat-body-strong" [ngClass]="{'textsuccess': element.percentage == 100, 'alert': element.percentage < 100}"> 
                 {{element.percentage}}%
             </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="totalTariff">
             <mat-header-cell *matHeaderCellDef mat-sort-header (click)="setFirstPage()"> TOTAL </mat-header-cell>
-            <mat-cell *matCellDef="let element" class="text-danger"> ${{utils.formatNumber(element.totalTariff)}} </mat-cell>
+            <mat-cell *matCellDef="let element" class="textdanger"> ${{utils.formatNumber(element.totalTariff)}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="detail">
             <mat-header-cell *matHeaderCellDef> DETALLE </mat-header-cell>
             <mat-cell *matCellDef="let element"> 
-                <button mat-icon-button (click)="detailTrip(element)"><mat-icon>remove_red_eye</mat-icon></button> 
+                <button mat-icon-button class="icon-blue" (click)="detailTrip(element)"><mat-icon>remove_red_eye</mat-icon></button> 
             </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="approach">
             <mat-header-cell *matHeaderCellDef> ACERCAMIENTOS </mat-header-cell>
             <mat-cell *matCellDef="let element"> 
-                <button mat-icon-button (click)="detailApproach(element)"><mat-icon>remove_red_eye</mat-icon></button> 
+                <button mat-icon-button class="icon-blue" (click)="detailApproach(element)"><mat-icon>remove_red_eye</mat-icon></button> 
             </mat-cell>
         </ng-container>
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

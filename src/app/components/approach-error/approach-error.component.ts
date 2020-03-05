@@ -4,7 +4,7 @@ import { Approach } from 'src/app/classes/approach';
 @Component({
   selector: 'app-approach-error',
   templateUrl: './approach-error.component.html',
-  styleUrls: ['./approach-error.component.css']
+  styleUrls: ['./approach-error.component.scss']
 })
 export class ApproachErrorComponent implements OnInit {
 

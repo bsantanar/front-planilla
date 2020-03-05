@@ -5,7 +5,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 @Component({
   selector: 'app-reserve',
   templateUrl: './reserve.component.html',
-  styleUrls: ['./reserve.component.css']
+  styleUrls: ['./reserve.component.scss']
 })
 export class ReserveComponent implements OnInit {
 

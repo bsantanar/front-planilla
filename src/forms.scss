@@ -1,0 +1,82 @@
+@import './bootstrap.scss';
+@import './custom-theme.scss';
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.form_field {
+  flex: 1 0 30%;
+  margin: 0.5em;
+
+  @include media-breakpoint-up(md) {
+    margin: 1.5em 0.5em;
+  }
+
+  & > .mat-form-field {
+    width: 100%;
+  }
+
+}
+
+.form_clearfix {
+  @include media-breakpoint-up(lg) {
+      flex: 1 0 30%;
+      margin: 1em;
+  }
+
+  @include media-breakpoint-up(md) {
+      flex: 1 0 30%;
+      margin: 1em;
+  }
+
+ @include media-breakpoint-up(xs) {
+  flex: 0;
+  }
+}
+
+.actions {
+  text-align: center;
+  margin: 1em;
+  @include media-breakpoint-up(lg) {
+      text-align: right;
+  }
+}
+
+.form_autocomplete {
+  font-size: inherit;
+  line-height: 3em;
+  height: 3em;
+  padding: 1em;
+}
+
+.mat-error {
+    font-weight: bold;
+}
+
+.new-dir {
+  color: $primary;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  cursor: pointer;
+
+  @include media-breakpoint-up(md) {
+    margin-top: 1em;
+  }
+
+  & > .new-dir_icon {
+    color: $light-primary-text;
+    background-color: $primary;
+    border-radius: 5px;
+  }
+
+  & > label {
+    margin-right: 0.5em;
+  }
+}
+
+.new-dir:hover * {
+  cursor: pointer;
+}

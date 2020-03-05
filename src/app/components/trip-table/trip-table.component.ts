@@ -10,7 +10,7 @@ import { ApproachDetailComponent } from '../approach-detail/approach-detail.comp
 @Component({
   selector: 'app-trip-table',
   templateUrl: './trip-table.component.html',
-  styleUrls: ['./trip-table.component.css']
+  styleUrls: ['./trip-table.component.scss']
 })
 export class TripTableComponent implements OnInit {
 
