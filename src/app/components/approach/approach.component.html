@@ -1,1 +1,22 @@
-<p>approach works!</p>
+<mat-card class="mat-elevation-z5 mb-3 boxed-element">
+    <mat-grid-list cols=6 rowHeight="3em">
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+            Origen:
+        </mat-grid-tile>
+        <mat-grid-tile class="bold-text" [colspan]="1" [rowspan]="1">
+            {{approach.storeFk.storeName}}
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+            Destino:
+        </mat-grid-tile>
+        <mat-grid-tile class="bold-text" [colspan]="1" [rowspan]="1" >
+            {{approach.locationDestiny.lctionNameSector}}
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1" class="textdanger bold-text">
+            Monto:
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1" class="textdanger bold-text">
+            ${{utils.formatNumber(approach.cost)}}
+        </mat-grid-tile>
+    </mat-grid-list>
+</mat-card>

@@ -3,55 +3,55 @@
         <mat-grid-tile [colspan]="1" [rowspan]="1">
             Tienda:
         </mat-grid-tile>
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-grid-tile class="bold-text" [colspan]="1" [rowspan]="1">
             {{detail.officeStoreName}}
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1" [rowspan]="1">
             N° de Guía:
         </mat-grid-tile>
-        <mat-grid-tile [colspan]="1" [rowspan]="1" >
+        <mat-grid-tile class="bold-text" [colspan]="1" [rowspan]="1" >
             {{detail.guideNumber}}
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1" [rowspan]="1">
             Modalidad: 
         </mat-grid-tile>
-        <mat-grid-tile [colspan]="1" [rowspan]="1" >
+        <mat-grid-tile class="bold-text" [colspan]="1" [rowspan]="1" >
             {{detail.modality}}
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1" [rowspan]="1">
             Sector:
         </mat-grid-tile>
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-grid-tile class="bold-text" [colspan]="1" [rowspan]="1">
             {{detail.routeType}}
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1" [rowspan]="1">
             Nº Reserva:
         </mat-grid-tile>
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-grid-tile class="bold-text" [colspan]="1" [rowspan]="1">
             {{detail.reservationNumber}}
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1" [rowspan]="1">
             Peso:
         </mat-grid-tile>
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-grid-tile class="bold-text" [colspan]="1" [rowspan]="1">
             {{detail.weight}} Kg
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1" [rowspan]="1">
             Recorrido:
         </mat-grid-tile>
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-grid-tile class="bold-text" [colspan]="1" [rowspan]="1">
             <small>{{detail.locationOrigin}}-{{detail.locationDestination}}</small> 
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1" [rowspan]="1">
             Hoja de Ruta:
         </mat-grid-tile>
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-grid-tile class="bold-text" [colspan]="1" [rowspan]="1">
             {{detail.roadNumber}}
         </mat-grid-tile>
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-grid-tile [colspan]="1" [rowspan]="1" class="textdanger bold-text">
             Monto:
         </mat-grid-tile>
-        <mat-grid-tile [colspan]="1" [rowspan]="1" class="text-danger">
+        <mat-grid-tile [colspan]="1" [rowspan]="1" class="textdanger bold-text">
             ${{utils.formatNumber(detail.tariff)}}
         </mat-grid-tile>
     </mat-grid-list>

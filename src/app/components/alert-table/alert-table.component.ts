@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { Carrier } from 'src/app/classes/carrier';
+import { Carrier } from 'src/app/domain/carrier';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
-import { Alert } from 'src/app/classes/alert';
+import { Alert } from 'src/app/domain/alert';
 
 @Component({
   selector: 'app-alert-table',

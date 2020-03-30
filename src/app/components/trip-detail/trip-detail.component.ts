@@ -1,10 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { UtilsService } from 'src/app/services/utils.service';
-import { Alert } from 'src/app/classes/alert';
-import { Reservation } from 'src/app/classes/reservation';
+import { Alert } from 'src/app/domain/alert';
+import { Reservation } from 'src/app/domain/reservation';
 import { ReserveService } from 'src/app/services/reserve.service';
-import { TripRange } from 'src/app/classes/trip-range';
+import { TripRange } from 'src/app/domain/trip-range';
+import { formatNumber } from '../../utils/utils';
 
 @Component({
   selector: 'app-trip-detail',
@@ -16,6 +17,7 @@ export class TripDetailComponent implements OnInit {
   listDetailError: Alert[] = [];
   listDetail: Reservation[] = [];
   patent: string = "";
+  totalTariff: number = 0;
 
   constructor(public dialogRef: MatDialogRef<TripDetailComponent>,
     @Inject(MAT_DIALOG_DATA) public data: TripRange, private utils: UtilsService, 
@@ -33,6 +35,7 @@ export class TripDetailComponent implements OnInit {
         });
       }
       this.patent = this.data.patent;
+      this.totalTariff = this.data.totalTariff;
     }
     //this.data = this.test;
     //console.log(this.data);

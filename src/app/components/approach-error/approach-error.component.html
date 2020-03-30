@@ -1,1 +1,46 @@
-<p>approach-error works!</p>
+<mat-card class="mat-elevation-z5 mb-3 boxed-element">
+    <mat-grid-list cols=12 rowHeight="3em">
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+            Tienda:
+        </mat-grid-tile>
+        <mat-grid-tile class="bold-text" [colspan]="2" [rowspan]="1">
+            {{error.storeFk.storeName}}
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+            Destino:
+        </mat-grid-tile>
+        <mat-grid-tile class="bold-text" [colspan]="2" [rowspan]="1" >
+            {{error.locationDestiny.lctionNameSector}}
+        </mat-grid-tile>
+        <mat-grid-tile *ngIf="error.cost <= 1" [colspan]="4" [rowspan]="1">
+            <button mat-raised-button color="primary" (click)="activeRate = !activeRate" [disabled]="activeRate">Valorizar</button>
+        </mat-grid-tile>
+        <mat-grid-tile *ngIf="error.cost > 1" [colspan]="4" [rowspan]="2">
+            Solucionado (${{error.cost}})
+        </mat-grid-tile>
+    </mat-grid-list>
+    
+    <div *ngIf="activeRate" class="mt-2">
+        <mat-grid-list cols=6 rowHeight="6em">
+            <mat-grid-tile [colspan]="2" [rowspan]="1">
+                <mat-form-field appearance="outline">
+                    <mat-label>Valor Acercamiento</mat-label>
+                    <input matInput #approachValue maxlength="6" placeholder="5000">
+                    <mat-icon matSuffix>attach_money</mat-icon>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <button mat-button aria-label="add reserve value" (click)="rateApproach(approachValue.value, error)">
+                    <mat-icon class="green-icon">add_circle</mat-icon>
+                    Agregar
+                </button>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <button mat-button aria-label="add reserve value" (click)="activeRate = !activeRate">
+                    <mat-icon>chevron_left</mat-icon>
+                    Volver
+                </button>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+</mat-card>

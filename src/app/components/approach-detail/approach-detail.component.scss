@@ -1,0 +1,36 @@
+.flexbox{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.mat-dialog-content {
+    height: 60%;
+}
+
+.flexbox mat-card{
+    margin-bottom: 15px;
+    width: 30%;
+    margin-left: auto;
+    height: 5em;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px 0 rgba(55, 71, 79, 0.2);
+    background-color: #f5f8fd;
+}
+
+.reserve-resume {
+    font-size: 17px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.76;
+    text-align: center;
+}
+
+.text-primary{
+    color: #005fae;
+}
+
+.text-red{
+    color: red;
+}

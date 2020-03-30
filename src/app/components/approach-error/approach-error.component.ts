@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Approach } from 'src/app/classes/approach';
+import { Approach } from 'src/app/domain/approach';
+import { ApproachService } from 'src/app/services/approach.service';
 
 @Component({
   selector: 'app-approach-error',
@@ -8,11 +9,32 @@ import { Approach } from 'src/app/classes/approach';
 })
 export class ApproachErrorComponent implements OnInit {
 
+  activeRate: boolean = false;
   @Input() error: Approach;
 
-  constructor() { }
+  constructor(private approachService: ApproachService) { }
 
   ngOnInit() {
+  }
+
+  rateApproach(value: number, approach: Approach){
+    if(value > 1){
+      console.log(approach);
+      approach.cost = value;
+      let obj = {
+        apprchPk: approach.approachPK,
+        apprchValTariff: value
+      };
+      this.activeRate = !this.activeRate;
+      this.approachService.updateApproachTariff(obj).subscribe(
+        res => { 
+          //console.log(res);
+        },
+        err => { 
+          //console.log(err); 
+        }
+      );
+    }
   }
 
 }

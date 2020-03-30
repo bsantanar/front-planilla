@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { Trip } from 'src/app/classes/trip';
+import { Trip } from 'src/app/domain/trip';
 import { MatPaginator, MatTableDataSource, MatDialog, MatSort } from '@angular/material';
 import { UtilsService } from 'src/app/services/utils.service';
 import { TripDetailComponent } from '../trip-detail/trip-detail.component';
-import { TripRange } from 'src/app/classes/trip-range';
-import { Carrier } from 'src/app/classes/carrier';
+import { TripRange } from 'src/app/domain/trip-range';
+import { Carrier } from 'src/app/domain/carrier';
 import { ApproachDetailComponent } from '../approach-detail/approach-detail.component';
 
 @Component({
@@ -34,8 +34,8 @@ export class TripTableComponent implements OnInit {
 
   detailTrip(tripRange: TripRange): void {
     const dialogRef = this.dialog.open(TripDetailComponent, {
-      width: '65%',
-      height: '80%',
+      width: '60%',
+      height: '70%',
       data: tripRange,
       autoFocus: false
     });
@@ -47,8 +47,8 @@ export class TripTableComponent implements OnInit {
 
   detailApproach(tripRange: TripRange): void {
     const dialogRef = this.dialog.open(ApproachDetailComponent, {
-      width: '65%',
-      height: '80%',
+      width: '60%',
+      height: '70%',
       data: tripRange,
       autoFocus: false
     });

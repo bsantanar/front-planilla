@@ -10,7 +10,7 @@ export interface Approach {
         storeId: number;
         storeName: string;
     };
-    locarionDestiny: {
+    locationDestiny: {
         lctionPK: number;
         lctionNameSector: string;
         lctionNameProvince: string;

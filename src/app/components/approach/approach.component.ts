@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Approach } from 'src/app/classes/approach';
+import { Approach } from 'src/app/domain/approach';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-approach',
@@ -10,9 +11,10 @@ export class ApproachComponent implements OnInit {
 
   @Input() approach: Approach;
 
-  constructor() { }
+  constructor(private utils: UtilsService) { }
 
   ngOnInit() {
+    //console.log(this.approach);
   }
 
 }

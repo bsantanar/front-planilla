@@ -1,4 +1,13 @@
-<h1 mat-dialog-title>Detalle acercamientos de viaje / Patente {{patent}} </h1>
+<h2>Detalle acercamientos de viaje</h2>
+<div class="flexbox">
+    <h2> Patente {{patent}} </h2>
+    <mat-card>
+        <mat-card-title class="reserve-resume text-primary">Total de reservas valorizadas</mat-card-title>
+        <mat-card-content class="reserve-resume text-red">
+            ${{utils.formatNumber(totalTariff)}}
+        </mat-card-content>
+    </mat-card>
+</div>
 <mat-dialog-content>
     <mat-tab-group mat-stretch-tabs dynamicHeight>
         <mat-tab  label="Valorizados">

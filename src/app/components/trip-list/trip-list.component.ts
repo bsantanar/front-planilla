@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { TripService } from 'src/app/services/trip.service';
-import { Trip } from 'src/app/classes/trip';
+import { Trip } from 'src/app/domain/trip';
 import { CarrierService } from 'src/app/services/carrier.service';
 import { UtilsService } from 'src/app/services/utils.service';
-import { Alert } from 'src/app/classes/alert';
+import { Alert } from 'src/app/domain/alert';
 import { FormControl } from '@angular/forms';
-import { TripRange } from 'src/app/classes/trip-range';
+import { TripRange } from 'src/app/domain/trip-range';
 
 @Component({
   selector: 'app-trip-list',
@@ -14,8 +14,8 @@ import { TripRange } from 'src/app/classes/trip-range';
 })
 export class TripListComponent implements OnInit {
 
-  startDate: Date = new Date(2020, 1, 3);
-  endDate: Date = new Date(2020, 1, 3);
+  startDate: Date = new Date(2020, 2, 6);
+  endDate: Date = new Date(2020, 2, 6);
   date: FormControl = new FormControl();
   maxDate = new Date();
   minDate = new Date(2018, 0, 1);
